@@ -1,0 +1,19 @@
+<h1>User List </h1>
+<table>
+    <tr>
+<th>Name</th>
+<th>User Name</th>
+<th>Email</th>
+<th>Phone no</th>
+<th>View more</th>
+</tr>
+<% users.forEach(function (user){ %>
+<tr>
+<td><%= user.name %> </td>
+<td><%= user.username %> </td>
+<td><%= user.email %> </td>
+<td><%= user.phone %> </td>
+<td><a href="/view.ejs?id="<% user.id%>>View</a></td>
+</tr>
+<% }) %>
+</table>

@@ -1,0 +1,20 @@
+{
+  "name": "shubh",
+  "version": "1.0.0",
+  "description": "A node js test project",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js",
+    "shubh": "node app.js"
+  },
+  "keywords": [
+    "node.js"
+  ],
+  "author": "shubhangi.shukla@loginworks.com",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "ejs": "^2.6.1",
+    "express": "^4.16.3"
+  }
+}
