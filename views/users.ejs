@@ -1,5 +1,6 @@
-<h1>User List </h1>
-<table>
+<% include ./common/header %>
+<h1 style="padding:10px;">User List  <a style="float:right; font-size:15px;" href="/users/add">Add user</a> </h1>
+<table class="table table-condensed table-hover">
     <tr>
 <th>Name</th>
 <th>User Name</th>
@@ -13,7 +14,9 @@
 <td><%= user.username %> </td>
 <td><%= user.email %> </td>
 <td><%= user.phone %> </td>
-<td><a href="/view.ejs?id="<% user.id%>>View</a></td>
+<td><a href="/users/<%= user.id%>">View</a></td>
 </tr>
 <% }) %>
 </table>
+
+<% include ./common/footer %>

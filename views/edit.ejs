@@ -1,0 +1,14 @@
+<% include ./common/header %>
+    <form method="post" action="/edit/<%=user.id%>">
+        <label>Name</label>
+        <input type "text" name="name" value="<%= user.name %> " id="name" /></br>
+        <label>Username</label>
+        <input type "text" name="uname" value="<%= user.username %> " id="uname" /></br>
+        <label>Phone</label>
+        <input type "text" name="phone" value="<%= user.phone %> " id="email" /></br>
+        <label>Email</label>
+        <input type "text" name="email" value="<%= user.email %> " id="email" /></br>
+        <button type="submit">Submit</button>
+    </form>
+
+<% include ./common/footer %>
