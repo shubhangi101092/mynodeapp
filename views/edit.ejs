@@ -1,5 +1,5 @@
 <% include ./common/header %>
-    <form method="post" action="/update/<%=user.id%>">
+    <form method="post" action="/update/<%=user.id%>?method=PUT">
         <label>Name</label>
         <input type="text" name="name" value="<%= user.name %> " id="name" /></br>
         <label>Username</label>

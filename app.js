@@ -4,6 +4,7 @@ var express = require("express"),
     methodOverride = require("method-override"),
     bodyparser = require("body-parser");
 mysql = require('mysql');
+var nodemailer = require('nodemailer');
 //initialize server/app
 var app = express();
 var connection = mysql.createConnection({
@@ -16,7 +17,13 @@ var usersdata = [];
 var reslt;
 connection.connect();
 
-
+var transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: 'ashishpatel3092@gmail.com',
+    pass: 'Mini@3868'
+  }
+});
 
 // change server settings
 app.set("views", path.join(__dirname, "views"));
@@ -59,17 +66,34 @@ app.get("/users/:id", function (req, res) {
         res.render('user', { user: userdata[0] });
     });
 });
-
+ 
 app.get("/edit/:id", function (req, res) {
     var id = req.params.id;
     connection.query('SELECT * from users  WHERE id=?', [id], function (error, results, fields) {
-        if (error) throw error;
+        if (error) throw error; 
         userdata = results;
         console.log("USERS:", results);
         res.status = 200;
         res.render('edit', { user: userdata[0] });
     });
 });
+
+app.get("/mail", function (req, res) {
+var mailOptions = {
+  from: 'ashish3092@gmail.com',
+  to: 'shubhangi.shukla@loginworks.com',
+  subject: 'Sending Email using Node.js',
+  text: 'That was easy!'
+};
+
+transporter.sendMail(mailOptions, function(error, info){
+  if (error) {
+    console.log(error);
+  } else {
+    console.log('Email sent: ' + info.response);
+  }
+});
+})
 app.post("/update/:id", function (req, res) {
     var id = req.params.id, user = req.body;
     connection.query('UPDATE users SET name= ?,email=?,username=?,phone=? WHERE id=?',[user.name,user.email,user.username,user.phone,id], function (error, results, fields) {
@@ -110,7 +134,15 @@ app.delete("/deluser/:id", (req, res) => {
 
 app.put("/updateuser/:id", (req, res) => {
     var id = req.params.id;
-    res.end('User with ' + id + ' deleted.');
+     var id = req.params.id, user = req.body;
+    connection.query('UPDATE users SET name= ?,email=?,username=?,phone=? WHERE id=?',[user.name,user.email,user.username,user.phone,id], function (error, results, fields) {
+        if (error) throw error;
+        // userdata = results;
+        console.log(user);
+        // res.status = 200;
+     res.redirect("/users");
+    });
+   // res.end('User with ' + id + ' deleted.');
 });
 
 app.get("*", function (req, res) {
